@@ -43,6 +43,29 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 		break;
 		case IDCANCEL: EndDialog(hwnd, 0); break;
+		case IDC_BUTTON_ADD:
+		{
+			DialogBoxParam(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DIALOG2), 0, (DLGPROC)DlgProc, 0);
+		}
+			break;
+		case IDOK_ADD:
+		{
+			CONST INT SIZE = 256;
+			CHAR sz_buffer[SIZE] = {};
+			HWND hEdit = GetDlgItem(hwnd, IDC_EDIT_ADD);
+			SendMessage(hEdit, WM_GETTEXT, SIZE, (LPARAM)sz_buffer);
+			if (sz_buffer != NULL)
+				SendMessage(GetDlgItem(hwnd, IDC_LIST1), LB_ADDSTRING, 0,(LPARAM)sz_buffer);
+			EndDialog(hwnd, 0);
+		}
+			break;
+		case IDC_BUTTON_DELETE:
+		{
+			HWND hListBox = GetDlgItem(hwnd, IDC_LIST1);
+			int i = SendMessage(hListBox, LB_GETCURSEL, 0, 0);
+			SendMessage(hListBox, LB_DELETESTRING, i, 0);
+		}
+			break;
 		}
 		break;
 	case WM_CLOSE: EndDialog(hwnd, 0);
