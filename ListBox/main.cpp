@@ -38,14 +38,14 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			int i = SendMessage(hListBox, LB_GETCURSEL, 0, 0);
 			SendMessage(hListBox, LB_GETTEXT, i, (LPARAM)sz_buffer);
 			CHAR sz_msg[SIZE] = {};
-			sprintf(sz_msg, "Вы выбрали элемент N %d, со строкой %s", i, sz_buffer);
+			sprintf(sz_msg, "Вы выбрали элемент N%d, со строкой %s", i, sz_buffer);
 			MessageBox(hwnd, sz_msg, "info", MB_OK | MB_ICONINFORMATION);
 		}
 		break;
 		case IDCANCEL: EndDialog(hwnd, 0); break;
 		case IDC_BUTTON_ADD:
 		{
-			DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DIALOG2), hwnd, (DLGPROC)DlgProc);
+			DialogBox(GetModuleHandle(NULL), LPCTSTR(IDD_DIALOG2), hwnd, (DLGPROC)DlgProc);
 		}
 			break;
 		case IDOK_ADD:
@@ -54,9 +54,18 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			CHAR sz_buffer[SIZE] = {};
 			HWND hEdit = GetDlgItem(hwnd, IDC_EDIT_ADD);
 			SendMessage(hEdit, WM_GETTEXT, SIZE, (LPARAM)sz_buffer);
-			EndDialog(hwnd, 0);
+			if (GetDlgItem(hwnd, 123))
+			{
+				MessageBox(hwnd, "ItemOK", "Info", MB_OK);
+			}
+			else
+			{
+				MessageBox(hwnd, "NoItemFound", "Info", MB_OK);
+
+			}
 			if (sz_buffer != NULL)
 				SendMessage(GetDlgItem(hwnd, IDC_LIST1), LB_ADDSTRING, 0, (LPARAM)sz_buffer);
+			EndDialog(hwnd, 0);
 		}
 			break;
 		case IDC_BUTTON_DELETE:
