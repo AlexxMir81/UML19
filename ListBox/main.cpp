@@ -54,7 +54,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			CHAR sz_buffer[SIZE] = {};
 			HWND hEdit = GetDlgItem(hwnd, IDC_EDIT_ADD);
 			SendMessage(hEdit, WM_GETTEXT, SIZE, (LPARAM)sz_buffer);
-			if (GetDlgItem(hwnd, 123))
+		/*	if (GetDlgItem(hwnd, 123))
 			{
 				MessageBox(hwnd, "ItemOK", "Info", MB_OK);
 			}
@@ -62,9 +62,10 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			{
 				MessageBox(hwnd, "NoItemFound", "Info", MB_OK);
 
-			}
+			}*/
+			HWND parent = GetParent(hwnd);
 			if (sz_buffer != NULL)
-				SendMessage(GetDlgItem(hwnd, IDC_LIST1), LB_ADDSTRING, 0, (LPARAM)sz_buffer);
+				SendMessage(GetDlgItem(parent, IDC_LIST1), LB_ADDSTRING, 0, (LPARAM)sz_buffer);
 			EndDialog(hwnd, 0);
 		}
 			break;
