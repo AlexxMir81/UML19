@@ -56,6 +56,14 @@ IDI_ICON_TOWER          ICON                    "towersignalantenna.ico"
 
 IDI_ICON_CHIP           ICON                    "chipsimsdcard.ico"
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_CURSOR1             CURSOR                  "cursor1.cur"
+
 #endif    // Russian (Russia) resources
 /////////////////////////////////////////////////////////////////////////////
 

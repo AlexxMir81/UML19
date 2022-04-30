@@ -26,7 +26,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	wc.hIconSm = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON_CHIP)); //SmallIcon от отображается в строке заголовка
 	//wc.hIcon = (HICON)LoadImage(hInstance, "radiotower.ico", IMAGE_ICON, LR_DEFAULTSIZE, LR_DEFAULTSIZE, LR_LOADFROMFILE),
 	//wc.hIconSm = (HICON)LoadImage(hInstance, "card_sim.ico", IMAGE_ICON, LR_DEFAULTSIZE, LR_DEFAULTSIZE, LR_LOADFROMFILE),
-	wc.hCursor = LoadCursor(hInstance, IDC_ARROW);
+	wc.hCursor = LoadCursor(hInstance, LPCSTR(IDC_CURSOR1));
 	wc.hInstance = hInstance;
 	wc.hbrBackground = (HBRUSH)COLOR_WINDOW;
 	wc.lpfnWndProc = (WNDPROC)WndProc; //имя фукции - это указатель на функцию, оно содержить адрес,
