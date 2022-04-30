@@ -45,7 +45,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		case IDCANCEL: EndDialog(hwnd, 0); break;
 		case IDC_BUTTON_ADD:
 		{
-			DialogBoxParam(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DIALOG2), 0, (DLGPROC)DlgProc, 0);
+			DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DIALOG2), hwnd, (DLGPROC)DlgProc);
 		}
 			break;
 		case IDOK_ADD:
@@ -54,9 +54,9 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			CHAR sz_buffer[SIZE] = {};
 			HWND hEdit = GetDlgItem(hwnd, IDC_EDIT_ADD);
 			SendMessage(hEdit, WM_GETTEXT, SIZE, (LPARAM)sz_buffer);
-			if (sz_buffer != NULL)
-				SendMessage(GetDlgItem(hwnd, IDC_LIST1), LB_ADDSTRING, 0,(LPARAM)sz_buffer);
 			EndDialog(hwnd, 0);
+			if (sz_buffer != NULL)
+				SendMessage(GetDlgItem(hwnd, IDC_LIST1), LB_ADDSTRING, 0, (LPARAM)sz_buffer);
 		}
 			break;
 		case IDC_BUTTON_DELETE:
