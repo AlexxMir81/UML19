@@ -3,14 +3,18 @@
 #include<cstdio>
 #include"resource.h"
 
-#define IDC_STATIC 1000 //Ресурс для static text
+//#define IDC_STATIC 1000 //Ресурс для static text
 
 CONST CHAR g_szClassName[] = "MyWindowClass"; //имя класса окна
 CONST CHAR g_szWindowTitle[] = "My first Window"; //заголовок окна
 //g_ - Global
 //sz - string zero (NULL Terminated Line) Венгерская нотация
-
 //wvWidgets библиотека для работы с окнами
+
+CONST INT g_iBtnSize = 50; //размер кнопки в пикселях
+CONST INT g_INTERVAL = 2;   //интервал между кнопками в пикселях
+CONST INT g_START_X = 10;
+CONST INT g_START_Y = 10;
 
 INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -87,7 +91,8 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		//CreateWindowExA - ANSI-кодиоовка
 		//CreateWindowExW - Wide-кодиоовка (Unicode)
-		HWND hStatic = CreateWindowEx
+		//Create IDC_Static:
+		/*HWND hStatic = CreateWindowEx
 		(
 			0,
 			"Static",
@@ -100,7 +105,29 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			(HMENU)IDC_STATIC,
 			GetModuleHandle(NULL), //возвращает hInstance
 			0
-		);
+		);*/
+
+		int digit = 1;
+		char sz_digit[] = "0";
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 3; j++)
+			{
+				sz_digit[0] ='0'+ digit;
+				CreateWindowEx
+				(
+					0, "Button", sz_digit,
+					WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+					g_START_X + (g_iBtnSize + g_INTERVAL)*j,
+					g_START_Y + (g_iBtnSize + g_INTERVAL)*(2-i),
+					g_iBtnSize, g_iBtnSize,
+					hwnd, (HMENU)(IDC_BUTTON_0+digit),
+					GetModuleHandle(NULL), NULL
+				);
+				digit++;
+			}
+		}
+
 	}
 		break;
 	case WM_COMMAND: break;
@@ -115,7 +142,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		int window_heght = rect.bottom - rect.top;
 		sprintf(sz_msg, "%s - Size:%ix%i, Position: %ix%i", g_szWindowTitle, window_width, window_heght, rect.left, rect.top);
 		SendMessage(hwnd, WM_SETTEXT, 0, (LPARAM)sz_msg);
-		SendMessage(GetDlgItem(hwnd, IDC_STATIC), WM_SETTEXT, 0, (LPARAM)sz_msg);
+	//	SendMessage(GetDlgItem(hwnd, IDC_STATIC), WM_SETTEXT, 0, (LPARAM)sz_msg);
 	}
 		break;
 	case WM_CLOSE: 
