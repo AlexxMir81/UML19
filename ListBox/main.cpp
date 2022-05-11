@@ -43,6 +43,12 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 		break;
 		case IDCANCEL: EndDialog(hwnd, 0); break;
+		case IDC_CHECK_SORT:
+			if (SendMessage(GetDlgItem(hwnd, IDC_CHECK_SORT), BM_GETCHECK, 0, 0) == BST_CHECKED)
+				MessageBox(hwnd, "Chekbox установлен", "Info", MB_OK);
+			if (SendMessage(GetDlgItem(hwnd, IDC_CHECK_SORT), BM_GETCHECK, 0, 0) == BST_UNCHECKED)
+				MessageBox(hwnd, "Chekbox сброшен", "Info", MB_OK);
+			break;
 		case IDC_BUTTON_ADD:
 		{
 			DialogBoxParam(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DIALOG2), hwnd, (DLGPROC)DlgProc,0);
