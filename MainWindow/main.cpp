@@ -21,8 +21,7 @@ INT arithm = 0;
 double d_digit_a;
 double d_digit_b;
 
-template<typename T>
-T math(T a, T b, int c);
+double math(double a, double b, int c);
 
 INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -165,6 +164,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			g_iBtnSize, g_iBtnSize,
 			hwnd, (HMENU)IDC_BUTTON_POINT, GetModuleHandle(NULL), NULL
 		);
+
 		CreateWindowEx
 		(
 			0, "Button", "+",
@@ -254,7 +254,8 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 			SendMessage(hEdit, WM_GETTEXT, 0, (LPARAM)sz_buffer);
 			d_digit_b = atof(sz_buffer);
-			sprintf(sz_buffer, "%f", math(d_digit_a, d_digit_b, arithm));
+			double answer = math(d_digit_a, d_digit_b, arithm);
+			(answer - (int)answer)? sprintf(sz_buffer, "%f", answer):sprintf(sz_buffer, "%i", (int)answer) ;
 			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_buffer);
 			d_digit_a = 0;
 			d_digit_b = 0;
@@ -285,8 +286,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	return FALSE;
 }
 
-template<typename T>
-T math(T a, T b, int c)
+double math(double a, double b, int c)
 {
 	if (c == IDC_BUTTON_PLUS)return a + b;
 	if (c == IDC_BUTTON_MINUS)return a - b;
