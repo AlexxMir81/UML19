@@ -17,9 +17,9 @@ CONST INT g_START_X = 10;
 CONST INT g_START_Y = 10;
 CONST INT g_SCREEN_HEIGHT = 25;
 
-INT arithm = 0;
-double d_digit_a;
-double d_digit_b;
+INT g_arithm = 0;
+double g_d_digit_a;
+double g_d_digit_b;
 
 double math(double a, double b, int c);
 
@@ -246,20 +246,20 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			|| LOWORD(wParam) == IDC_BUTTON_ASTER|| LOWORD(wParam) == IDC_BUTTON_SLASH)
 		{
 			SendMessage(hEdit, WM_GETTEXT, 0, (LPARAM)sz_buffer);
-			d_digit_a = atof(sz_buffer);
-			arithm = LOWORD(wParam);
+			g_d_digit_a = atof(sz_buffer);
+			g_arithm = LOWORD(wParam);
 			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)"");
 		}
 		if (LOWORD(wParam) == IDC_BUTTON_EQUAL)
 		{
 			SendMessage(hEdit, WM_GETTEXT, 0, (LPARAM)sz_buffer);
-			d_digit_b = atof(sz_buffer);
-			double answer = math(d_digit_a, d_digit_b, arithm);
+			g_d_digit_b = atof(sz_buffer);
+			double answer = math(g_d_digit_a, g_d_digit_b, g_arithm);
 			(answer - (int)answer)? sprintf(sz_buffer, "%f", answer):sprintf(sz_buffer, "%i", (int)answer) ;
 			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_buffer);
-			d_digit_a = 0;
-			d_digit_b = 0;
-			arithm = 0;
+			g_d_digit_a = 0;
+			g_d_digit_b = 0;
+			g_arithm = 0;
 		}
 	}
 		break;
